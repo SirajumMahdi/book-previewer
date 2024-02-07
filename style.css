@@ -1,0 +1,79 @@
+/* Popup container */
+.bp-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+}
+
+/* Popup content */
+.bp-popup-content {
+  background-color: #a7a7a7;
+  width: 80%;
+  max-width: 850px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Popup open button */
+.bp-open-popup-button {
+  background-color: #c80000 !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+}
+
+/* Close button */
+.bp-close-popup {
+  position: absolute;
+  top: -37px;
+  right: -35px;
+  cursor: pointer;
+  font-size: 30px;
+  line-height: 1em;
+  background: #fff;
+  padding: 3px 8px 0px 8px;
+  border-radius: 6px;
+  color: #cc1818;
+  transition: ease-in 0.1s;
+}
+
+span.bp-close-popup:hover {
+  background: #cc1818;
+  color: #fff;
+}
+
+/* Book previewer */
+ul#bp-gallery-list {
+  height: 75vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 12px 0 12px 12px;
+  margin: 0;
+  list-style: none;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+
+/* hide the button if gallery is not avaiable */
+.bp-no-gallery button.bp-open-popup-button {
+  display: none;
+}
+
+/* Responsive CSS */
+
+@media (max-width: 576px) {
+  ul#bp-gallery-list {
+    height: 60vh;
+    padding: 12px 12px 12px 12px;
+  }
+}
