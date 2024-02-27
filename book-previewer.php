@@ -92,9 +92,14 @@ class BookPreviewer {
 		$read_preview_button = get_option('book-previewer-read-preview-button', 'yes');
 
 		if ($read_preview_button === 'yes' && is_product()) {
-			echo '<div>';
-			echo '<button type="button" class="bp-open-popup-button">' . esc_html__('Read Preview', 'book-previewer') . '</button>';
-			echo '</div>';
+			$read_preview_button_text = get_option('book-previewer-read-preview-button-text', __('Read Preview', 'book-previewer'));
+			$read_preview_button = get_option('book-previewer-read-preview-button', 'yes');
+
+			if ($read_preview_button === 'yes' && is_product()) {
+				echo '<div>';
+				echo '<button type="button" class="bp-open-popup-button">' . esc_html($read_preview_button_text) . '</button>';
+				echo '</div>';
+			}
 		}
 	}
 
@@ -131,6 +136,14 @@ class BookPreviewer {
 			'type' => 'checkbox',
 			'default' => 'yes',
 		);
+		$settings[] = array(
+			'title' => __('Read Preview Button Text', 'book-previewer'),
+			'desc' => __('Enter the text for the read preview button', 'book-previewer'),
+			'id' => 'book-previewer-read-preview-button-text',
+			'type' => 'text',
+			'default' => __('Read Preview', 'book-previewer'),
+		);
+
 		$settings[] = array(
 			'type' => 'sectionend',
 			'id' => 'book-previewer-options',
