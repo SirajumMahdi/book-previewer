@@ -32,7 +32,7 @@ class BookPreviewer {
 			add_action('wp_footer', array($this, 'bp_add_gallery_popup'));
 			add_action('woocommerce_after_add_to_cart_button', array($this, 'bp_add_open_popup_button'));
 			add_action('wp_footer', array($this, 'bp_add_popup_open_function'));
-			add_filter('woocommerce_get_settings_products', array($this, 'bp_add_featured_image_class_settings'));
+			add_filter('woocommerce_get_settings_products', array($this, 'bp_add_plugin_settings'));
 		} else {
 			add_action('admin_notices', array($this, 'bp_woocommerce_missing_notice'));
 		}
@@ -89,7 +89,9 @@ class BookPreviewer {
 	}
 
 	public function bp_add_open_popup_button() {
-		if (is_product()) {
+		$read_preview_button = get_option('book-previewer-read-preview-button', 'yes');
+
+		if ($read_preview_button === 'yes' && is_product()) {
 			echo '<div>';
 			echo '<button type="button" class="bp-open-popup-button">' . esc_html__('Read Preview', 'book-previewer') . '</button>';
 			echo '</div>';
@@ -109,7 +111,7 @@ class BookPreviewer {
 		}
 	}
 
-	public function bp_add_featured_image_class_settings($settings) {
+	public function bp_add_plugin_settings($settings) {
 		$settings[] = array(
 			'title' => __('Book Previewer', 'book-previewer'),
 			'type' => 'title',
@@ -121,6 +123,13 @@ class BookPreviewer {
 			'id' => 'book-previewer-featured-image-class',
 			'type' => 'text',
 			'default' => 'book-cover',
+		);
+		$settings[] = array(
+			'title' => __('Read Preview Button', 'book-previewer'),
+			'desc' => __('Enable or disable the read preview button', 'book-previewer'),
+			'id' => 'book-previewer-read-preview-button',
+			'type' => 'checkbox',
+			'default' => 'yes',
 		);
 		$settings[] = array(
 			'type' => 'sectionend',
